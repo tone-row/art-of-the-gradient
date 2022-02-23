@@ -1,0 +1,309 @@
+.layer {
+  padding-bottom: calc(var(--gap) / 2);
+  padding-top: var(--gap);
+  overflow: auto;
+}
+
+.layer-inner {
+  display: grid;
+  gap: var(--gap-sm);
+  grid-template: auto / auto minmax(0, 1fr);
+}
+
+.layer.inactive .layer-upper,
+.layer.inactive .layer-lower {
+  opacity: 0.33;
+  filter: blur(1px);
+}
+
+@media (min-width: 768px) {
+  .layer-inner {
+    grid-template: auto / min-content minmax(0, 400px);
+  }
+
+  /* To Add Padding on the Layer's Right */
+  .layer-lower::after {
+    content: " ";
+    display: block;
+    width: var(--gap);
+    height: var(--gap);
+  }
+}
+
+.layer-sidebar {
+  grid-row: span 2;
+  background-color: var(--grey);
+  padding: 5px;
+  border-radius: var(--border-radius);
+  display: grid;
+  justify-items: center;
+  align-content: space-between;
+  gap: var(--gap-sm);
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.layer-upper {
+  display: grid;
+  gap: var(--gap-sm);
+}
+
+.layer-types {
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--gap-sm);
+  align-items: center;
+  justify-content: start;
+}
+
+.background-type-btn {
+  font-size: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--border-radius);
+  --c: var(--grey);
+  border: solid 2px var(--c);
+  background: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  --bgc: white;
+}
+
+.background-type-btn:hover {
+  --c: var(--grey-1);
+}
+
+.background-type-btn.checked,
+.background-type-btn.checked:hover {
+  --c: var(--black);
+}
+
+.background-type-btn.solid {
+  background: var(--c);
+}
+
+.background-type-btn.linear {
+  background: linear-gradient(to right, var(--bgc) 50%, var(--c) 50%);
+}
+
+.background-type-btn.radial {
+  background: radial-gradient(circle, var(--bgc) 50%, var(--c) 50%);
+}
+
+.background-type-btn.conic {
+  background: conic-gradient(var(--bgc) 0%, var(--bgc) 12.5%, var(--c) 12.5%);
+}
+
+.background-type-btn.repeating-linear {
+  background: repeating-linear-gradient(
+    to right,
+    var(--bgc) 0px,
+    var(--bgc) 5px,
+    var(--c) 5px,
+    var(--c) 10px
+  );
+}
+
+.background-type-btn.repeating-radial {
+  background: repeating-radial-gradient(
+    circle,
+    var(--bgc) 0px,
+    var(--bgc) 5px,
+    var(--c) 5px,
+    var(--c) 10px
+  );
+}
+
+.background-type-btn.repeating-conic {
+  background: repeating-conic-gradient(
+    var(--bgc) 0%,
+    var(--bgc) 5%,
+    var(--c) 5%,
+    var(--c) 10%
+  );
+}
+
+.layer-lower {
+  display: grid;
+  gap: var(--gap);
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: start;
+}
+
+.layer-color {
+  width: calc(50px + var(--gap));
+  height: 119px;
+  border-radius: var(--border-radius);
+  background-color: var(--bg);
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.layer-color-list {
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--gap-sm);
+  justify-content: start;
+}
+
+.layer-color-aside {
+  display: grid;
+  align-content: space-between;
+}
+
+.fade-btn {
+  cursor: pointer;
+  height: var(--gap);
+  width: 45px;
+  border: none;
+  background: var(--grey);
+  border-radius: 45px;
+}
+
+.fade-btn.active {
+  background: linear-gradient(to right, var(--from), var(--to));
+}
+
+.color-popover {
+  z-index: 1;
+}
+
+/* Scrollbars */
+.layer {
+  scrollbar-color: var(--track) transparent;
+}
+.layer::-webkit-scrollbar {
+  height: var(--gap-sm);
+}
+.layer::-webkit-scrollbar-thumb {
+  background: var(--track);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+}
+.layer:hover::-webkit-scrollbar-thumb {
+  background: var(--track-hover);
+}
+
+.layer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.icon-btn {
+  -webkit-appearance: none;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  color: var(--grey-1);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+}
+.icon-btn:hover {
+  color: var(--grey-2);
+}
+
+.layer-type-settings {
+  display: grid;
+  align-items: center;
+  justify-content: start;
+  gap: var(--gap);
+  grid-auto-flow: column;
+  padding: 4px 6px;
+  background-color: var(--grey-0);
+  border-radius: var(--border-radius);
+  line-height: 1;
+}
+
+.layer-type-settings label {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  gap: var(--gap-sm);
+}
+
+.popover {
+  background-color: var(--grey);
+  padding: 15px;
+  font-size: var(--font-size-xs);
+  border-radius: var(--border-radius);
+  color: var(--grey-3);
+  box-shadow: var(--elevation);
+}
+
+.popover-arrow {
+  fill: var(--grey);
+}
+
+.popover-inner {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: var(--gap-sm);
+  white-space: nowrap;
+}
+
+.popover-inner button {
+  background: none;
+  border: none;
+  font-weight: 700;
+  padding: 3px;
+  line-height: auto;
+  margin: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: var(--font-family);
+  opacity: 0.6;
+  color: inherit;
+  border-radius: var(--border-radius);
+}
+
+.popover-inner button:hover {
+  opacity: 1;
+}
+
+.popover-inner .delete-btn {
+  color: red;
+}
+
+.layer-color-wrapper {
+  font-size: 0;
+  position: relative;
+}
+
+.delete-color {
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: none;
+  background: none;
+  color: var(--white);
+  background-color: white;
+  border-top-left-radius: 100px;
+  padding: 2px 0 0 2px;
+  color: var(--grey-1);
+}
+
+.delete-color:hover,
+.delete-color:focus-visible {
+  color: var(--grey-2);
+}
+
+.delete-color svg {
+  display: block;
+  transform: translate(2px, 2px);
+}
+
+.layer-color-wrapper:focus-within .delete-color,
+.layer-color-wrapper:hover .delete-color {
+  opacity: 1;
+}

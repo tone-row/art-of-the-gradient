@@ -1,0 +1,7 @@
+{
+  "https://unpkg.com/@parcel/css-wasm": { "resolved": "https://unpkg.com/@parcel/css-wasm@1.4.0/index.js", "integrity": "sha512-HMOt9dBaSpxa9i6BtVuMJjHeQa/bglyATnLbeEzGofMhGeqDnIL8sMsF1IWZAWiy8QKW9LhKbPb0rlQMr2PbIg==", "contentType": "application/javascript; charset=utf-8" },
+  "https://unpkg.com/@parcel/css-wasm@1.4.0/browserslistToTargets.js": { "integrity": "sha512-m5Zw8Kfd+6AwZwIwFllAewhfTdVM9gvNF0wAQ9ARPdi4Scx1nuuDQiPRHw3nVzK+xBxBen4sRxHLrOrAayZ/nA==", "contentType": "application/javascript; charset=utf-8" },
+  "https://unpkg.com/@parcel/css-wasm@1.4.0/parcel_css_node.js": { "integrity": "sha512-265YkY4waXf+OPTHOTo2KE3D73blew6lHdqPhm5QBBzJXhNHSEx9LT1+AlzMxSrc7Bw90gmLeejQ/5ESsWWnRw==", "contentType": "application/javascript; charset=utf-8" },
+  "https://unpkg.com/@parcel/css-wasm@1.4.0/parcel_css_node_bg.wasm": { "integrity": "sha512-AkAB+t+p9tQ0QC8nuty4Vu3I1ltf/9M0ZZCafUlVRBiI806MGElr+nIT2JgW1AS9fOHiXIqqKw8o+N8XuG5IZQ==", "contentType": "application/wasm" },
+  "version": 1
+}

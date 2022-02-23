@@ -1,0 +1,12 @@
+.codeblock {
+  font-size: 14px;
+  border-radius: var(--border-radius);
+  margin: 0;
+  margin-right: var(--gap);
+  border: 1px solid var(--grey-0);
+  background-color: var(--grey-0) !important;
+}
+
+.codeblock code {
+  font-family: "Space Mono", monospace;
+}

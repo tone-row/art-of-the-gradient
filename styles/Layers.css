@@ -1,0 +1,26 @@
+.section-header {
+  display: grid;
+  justify-content: start;
+  grid-auto-flow: column;
+  align-items: end;
+  gap: 10px;
+}
+
+.layer-list {
+  display: flex;
+  gap: var(--gap);
+  flex-direction: column;
+}
+
+.add-layer-message {
+  background-color: var(--grey-0);
+  padding: var(--gap);
+  color: var(--grey-1);
+  display: grid;
+  place-content: center;
+  border-radius: var(--border-radius);
+}
+
+section.layers .section-header {
+  margin-bottom: calc(-1 * var(--gap) / 2);
+}

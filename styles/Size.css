@@ -1,0 +1,8 @@
+section.size label,
+section.position label {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  gap: var(--gap);
+}

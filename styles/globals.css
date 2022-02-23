@@ -1,0 +1,281 @@
+:root {
+  --font-size-lg: 30px;
+  --font-size-md: 20px;
+  --font-size: 16px;
+  --font-size-sm: 14px;
+  --font-size-xs: 12px;
+  --font-family: "PP Agrandir", sans-serif;
+  --font-family-narrow: "PP Agrandir Narrow", sans-serif;
+
+  --black: #222222;
+  --grey--1: #f8f8f8;
+  --grey-0: #f0f0f0;
+  --grey: #dedede;
+  --grey-1: #a8a8a8;
+  --grey-2: #696969;
+  --grey-3: #3b3b3b;
+
+  --border-radius: 2px;
+
+  --gap-sm: 4px;
+  --gap-lg: 24px;
+  --gap: 12px;
+
+  --elevation: 0 2px 3px -2px rgba(0, 0, 0, 0.5);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+.container {
+  background-color: white;
+  padding: var(--gap);
+  display: grid;
+  gap: var(--gap-lg);
+}
+
+main {
+  display: grid;
+  gap: var(--gap-lg);
+  grid-template: auto / repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-size-lg: 42px;
+    --font-size-md: 25px;
+    --font-size: 20px;
+    --font-size-sm: 18px;
+    --font-size-xs: 12px;
+
+    --gap-sm: 7px;
+    --gap-lg: 34px;
+    --gap: 17px;
+  }
+
+  section.preview {
+    display: none;
+  }
+
+  body {
+    background: var(--bg);
+    background-size: var(--size);
+    background-position: var(--position);
+    background-blend-mode: var(--blend);
+    background-attachment: fixed;
+  }
+
+  .app {
+    padding: calc(var(--gap) + 4px);
+  }
+
+  .container {
+    width: 500px;
+    border-radius: var(--border-radius);
+    border-top-right-radius: 60px;
+    margin-left: auto;
+    padding-right: 0;
+    margin-top: -110px;
+  }
+
+  .container.not-visible {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html body {
+  font-family: var(--font-family-narrow);
+  color: var(--black);
+}
+
+.preview {
+  background-color: white;
+  position: sticky;
+  top: var(--gap);
+  z-index: 2;
+  box-shadow: 0 2px 3px -2px rgba(0, 0, 0, 0.5);
+}
+
+.preview-inner {
+  height: 30vh;
+  border-radius: var(--border-radius);
+  background: var(--bg);
+  background-size: var(--size);
+  background-position: var(--position);
+  background-blend-mode: var(--blend);
+}
+
+/* To Move Later */
+h1 {
+  font-size: var(--font-size-lg);
+  font-family: var(--font-family);
+  font-weight: 700;
+  margin: 0;
+}
+
+a.byline {
+  color: var(--black);
+  text-decoration: none;
+  display: block;
+  font-size: var(--font-size);
+}
+
+a.byline:focus-visible {
+  color: var(--grey-1);
+  outline: none;
+}
+
+.twitter {
+  margin-left: var(--gap-sm);
+  color: #1da1f2;
+}
+
+h2 {
+  font-weight: 400;
+  margin: 0;
+}
+
+section {
+  display: grid;
+  gap: var(--gap);
+  align-content: start;
+}
+
+section.layers,
+section.blend,
+section.code {
+  grid-column: span 2;
+}
+
+.container-header {
+  display: grid;
+  gap: 3px;
+}
+
+.container-header-row {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-items: center;
+  font-size: var(--font-size-sm);
+  gap: var(--gap-sm);
+}
+
+/* Scrollbars */
+.container {
+  --track: transparent;
+  --track-hover: var(--grey-1);
+  scrollbar-color: var(--track) transparent;
+}
+.container::-webkit-scrollbar {
+  width: calc(var(--gap-sm) / 2);
+  height: 10px;
+}
+.container::-webkit-scrollbar-thumb {
+  background: var(--track);
+  border-radius: var(--border-radius);
+}
+.container:hover::-webkit-scrollbar-thumb {
+  background: var(--track-hover);
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.press-h-to-hide {
+  font-size: var(--font-size-sm);
+}
+.press-h-to-hide strong {
+  font-family: var(--font-family);
+}
+
+.app-btn {
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family);
+  font-weight: 700;
+  cursor: pointer;
+  background-color: var(--grey);
+  color: var(--grey-2);
+  border-radius: var(--border-radius);
+  padding: 5px;
+  line-height: 1;
+  display: grid;
+  align-items: center;
+  justify-content: start;
+  grid-auto-flow: column;
+  gap: 5px;
+  white-space: nowrap;
+  height: 24px;
+}
+
+.app-btn:hover {
+  background-color: var(--grey-2);
+  color: white;
+}
+
+.app-btn path {
+  stroke: currentColor !important;
+}
+
+.app-btn:disabled {
+  background-color: var(--grey--1);
+  color: var(--grey);
+}
+
+.app-btn:focus-visible,
+.icon-btn:focus-visible,
+.layer-color:focus-visible,
+.popover-inner button:focus-visible,
+.unit-option-label:focus-within,
+.background-type-btn:focus-within,
+.blend-mode:focus-within,
+.sketch-picker:focus-visible,
+.sketch-picker:focus-within {
+  outline-offset: 1px;
+  outline-color: var(--grey-1);
+  outline-style: solid;
+  outline-width: 2px;
+}
+
+.icon-btn.delete-color:focus-visible {
+  outline-offset: 0;
+  outline-width: 0;
+  background-color: var(--grey);
+}
+
+.popover-inner button:focus-visible {
+  outline-color: currentColor;
+  opacity: 1;
+}
+
+.tooltip-outer {
+  --bg: var(--grey);
+  background-color: var(--bg);
+  padding: var(--gap-sm);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family);
+  font-weight: 700;
+  border-radius: var(--border-radius);
+  box-shadow: var(--elevation);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.tooltip-arrow {
+  fill: var(--bg) !important;
+}

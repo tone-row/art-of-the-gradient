@@ -1,0 +1,58 @@
+.blend-modes {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: var(--gap-sm);
+}
+
+.blend-mode {
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  aspect-ratio: 1;
+  border: solid 2px var(--grey);
+  background-color: var(--grey-0);
+  border-radius: var(--border-radius);
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.blend-mode:hover {
+  border-color: var(--grey-1);
+  background-color: var(--grey);
+}
+
+.blend-mode-left,
+.blend-mode-right {
+  display: block;
+  position: absolute;
+  width: calc(75% - 4px);
+  height: calc(75% - 4px);
+}
+
+.blend-mode-left {
+  top: 2px;
+  left: 2px;
+  background-color: rgba(190, 120, 102, 0.5);
+  background-color: rgba(255, 0, 90, 0.5);
+}
+
+.blend-mode-right {
+  bottom: 2px;
+  right: 2px;
+  background-color: rgba(110, 50, 255, 1);
+  background-color: rgba(255, 100, 0, 1);
+  mix-blend-mode: var(--m, normal);
+}
+
+.blend-mode[aria-checked="true"] {
+  border-color: var(--black);
+  background-color: var(--grey);
+}
+
+@media (min-width: 768px) {
+  .blend-modes {
+    width: calc(100% - var(--gap));
+  }
+}

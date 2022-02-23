@@ -1,0 +1,23 @@
+.toggle-controls {
+  margin: 0 0 0 auto;
+  transform: translate(0px, 10px);
+  z-index: 1;
+  border-radius: 50%;
+  font-size: 0;
+  padding: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: sticky;
+  top: var(--gap);
+}
+
+@media (min-width: 768px) {
+  .toggle-controls {
+    display: block;
+  }
+}
+
+.toggle-controls:focus-visible {
+  outline: none;
+}

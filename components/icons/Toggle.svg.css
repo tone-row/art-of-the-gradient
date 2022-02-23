@@ -1,0 +1,6 @@
+.layer-toggle rect {
+  fill: var(--grey-1);
+}
+.layer-toggle.checked rect {
+  fill: var(--grey-2);
+}
