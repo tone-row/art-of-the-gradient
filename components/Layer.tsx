@@ -401,6 +401,7 @@ const IconButton = memo(
     }
   )
 );
+IconButton.displayName = "IconButton";
 
 const LayerTypeSettings = memo(function LayerTypeSettings({
   layer,
