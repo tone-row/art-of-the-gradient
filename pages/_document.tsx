@@ -12,21 +12,26 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta property="og:title" content="L'art du dégradé" key="title" />
+          <meta
+            property="og:title"
+            content="L'art du dégradé ~ The Art of the Gradient"
+            key="title"
+          />
           <meta
             property="og:description"
-            content="Your go-to gizmo for generating goofy gradients"
+            content="A CSS Gradient Generator. Your go-to gizmo for generating goofy gradients"
             key="description"
           />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@tone_row_" />
+          <meta name="twitter:creator" content="@rob______gordon" />
           <meta
-            property="twitter:card"
-            content="summary_large_image"
-            key="twitter:card"
+            name="twitter:title"
+            content="L'art du dégradé ~ The Art of the Gradient"
           />
           <meta
-            property="twitter:site"
-            content="@tone_row_"
-            key="twitter:site"
+            name="twitter:description"
+            content="A CSS Gradient Generator. Your go-to gizmo for generating goofy gradients"
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
