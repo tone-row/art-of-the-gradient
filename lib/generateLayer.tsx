@@ -137,7 +137,7 @@ const randomLayers: Record<
           },
         },
         {
-          blend: false,
+          blend: true,
           size: {
             amt: 30,
             unit: "%",

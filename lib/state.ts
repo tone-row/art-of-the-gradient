@@ -239,8 +239,11 @@ export function randomId(existing: string[] = []) {
 }
 
 export const getBaseURL = () => {
-  const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000";
+  const baseURL =
+    process.env.NEXT_PUBLIC_VERCEL_ENV === "production"
+      ? "https://art-of-the-gradient.tone-row.com"
+      : process.env.NEXT_PUBLIC_VERCEL_ENV === "preview"
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : "http://localhost:3000";
   return baseURL;
 };

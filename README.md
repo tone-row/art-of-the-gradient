@@ -27,3 +27,4 @@ The Art of the Gradient. A _trippy_ CSS Gradient Generator
 - input dragging is really laggy
 - figure out why increase arrow gets hover style
 - now you can't have 0 when editing the inputs..., that's no fun
+- add change color everywhere option
