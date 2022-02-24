@@ -6,17 +6,18 @@ export const backgroundTypes: { value: LayerType }[] = [
     value: "linear",
   },
   {
-    value: "radial",
-  },
-  {
-    value: "conic",
-  },
-  {
     value: "repeating-linear",
+  },
+  {
+    value: "radial",
   },
   {
     value: "repeating-radial",
   },
+  {
+    value: "conic",
+  },
+
   {
     value: "repeating-conic",
   },
@@ -117,3 +118,11 @@ const COLORS: RGBColor[] = [
   { r: 30, g: 0, b: 255, a: 0.5 },
   { r: 230, g: 255, b: 0, a: 0.5 },
 ];
+
+export const defaultSettings: AppState["settings"] = {
+  width: { amt: 100, unit: "%" },
+  height: { amt: 100, unit: "%" },
+  x: { amt: 0, unit: "%" },
+  y: { amt: 0, unit: "%" },
+  blend: "normal",
+};

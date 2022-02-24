@@ -7,7 +7,7 @@ import {
   backgroundPositionAtom,
   backgroundSizeAtom,
   getBaseURL,
-  layersAtom,
+  layersAtomWithStorage,
   settingsAtom,
 } from "../lib/state";
 import { AiOutlineCheck } from "react-icons/ai";
@@ -31,7 +31,7 @@ isParcelReadyAtom.onMount = (run) => {
   run();
 };
 
-const codeStringAtom = atom((get) => {
+const codeStringAtomWithStorage = atom((get) => {
   let code = `background: ${get(backgroundCssAtom)}; background-size: ${get(
     backgroundSizeAtom
   )}; background-position: ${get(
@@ -60,6 +60,9 @@ const codeStringAtom = atom((get) => {
     .join("\n");
 });
 
+// codeStringAtom
+// WITHOUT STORAGE
+
 async function copyCode(code: string) {
   const clipboard = (await import("clipboardy")).default;
   await clipboard.write(code);
@@ -68,7 +71,7 @@ async function copyCode(code: string) {
 
 const shareLinkAtom = atom((get) => {
   const settings = get(settingsAtom);
-  const layers = get(layersAtom);
+  const layers = get(layersAtomWithStorage);
   const compressed = pako
     .deflate(JSON.stringify({ settings, layers }))
     .toString()
@@ -77,14 +80,14 @@ const shareLinkAtom = atom((get) => {
   const searchParams = new URLSearchParams({
     data: compressed,
   });
-  return `${getBaseURL()}?${searchParams}`;
+  return `${getBaseURL()}/share?${searchParams}`;
 });
 
 type CopyState = { loading: boolean; copied: boolean };
 export function Code() {
   const [shareLink] = useAtom(shareLinkAtom);
   useAtom(isParcelReadyAtom);
-  const [codeString] = useAtom(codeStringAtom);
+  const [codeString] = useAtom(codeStringAtomWithStorage);
   return (
     <section className="code">
       <div className="section-header">

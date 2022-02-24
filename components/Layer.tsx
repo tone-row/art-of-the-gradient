@@ -1,5 +1,5 @@
 import { Atom, useAtom } from "jotai";
-import { allColorsAtom, layersAtom, rgba } from "../lib/state";
+import { allColorsAtom, layersAtomWithStorage, rgba } from "../lib/state";
 import produce from "immer";
 import {
   CSSProperties,
@@ -46,7 +46,7 @@ export const Layer = memo(
     ref
   ) {
     const [layer] = useAtom(atom);
-    const [layers, updateLayers] = useAtom(layersAtom);
+    const [layers, updateLayers] = useAtom(layersAtomWithStorage);
     // stores last units used per layer
     const shouldUseRotationUnits = rotationUnitTypes.includes(layer.type);
     const lastUnits = useRef<Amount["unit"][]>(
@@ -410,7 +410,7 @@ const LayerTypeSettings = memo(function LayerTypeSettings({
   layer: AppState["layers"][number];
   layerIndex: number;
 }) {
-  const [, updateLayers] = useAtom(layersAtom);
+  const [, updateLayers] = useAtom(layersAtomWithStorage);
 
   switch (layer.type) {
     case "solid":

@@ -1,0 +1,5 @@
+.share-options {
+  grid-column: span 2;
+  margin-right: var(--gap);
+  gap: var(--gap-sm);
+}

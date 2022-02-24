@@ -1,5 +1,9 @@
 import { PrimitiveAtom, useAtom } from "jotai";
-import { layerAtomAtoms, layersAtom, settingsAtom } from "../lib/state";
+import {
+  layerAtomAtoms,
+  layersAtomWithStorage,
+  settingsAtom,
+} from "../lib/state";
 import { Layer } from "./Layer";
 import produce from "immer";
 import { GrPowerReset } from "react-icons/gr";
@@ -11,7 +15,7 @@ import { Plus } from "./icons/Plus.svg";
 import { generateLayer } from "../lib/generateLayer";
 
 export default function Layers() {
-  const [layers, updateLayers] = useAtom(layersAtom);
+  const [layers, updateLayers] = useAtom(layersAtomWithStorage);
   const [layerAtoms] = useAtom(layerAtomAtoms);
   return (
     <section className="layers">
@@ -62,7 +66,7 @@ export default function Layers() {
 }
 
 function ResetLayers() {
-  const [layers, updateLayers] = useAtom(layersAtom);
+  const [layers, updateLayers] = useAtom(layersAtomWithStorage);
   const [, updateSettings] = useAtom(settingsAtom);
   return (
     <Popover.Root>

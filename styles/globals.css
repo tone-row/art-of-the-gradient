@@ -279,3 +279,53 @@ section.code {
 .tooltip-arrow {
   fill: var(--bg) !important;
 }
+
+.app-btn-lg {
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  background: var(--grey--1);
+  border: none;
+  margin: 0;
+  padding: var(--gap) 0;
+  border-radius: var(--border-radius);
+  align-items: start;
+  color: var(--grey-3);
+  justify-content: start;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.app-btn-lg:hover {
+  background-color: var(--grey);
+}
+
+.app-btn-lg-right {
+  display: grid;
+  gap: 4px;
+}
+
+.app-btn-lg span {
+  font-size: var(--font-size-sm);
+}
+
+.app-btn-lg .app-btn-lg-title {
+  font-size: var(--font-size-md);
+  font-family: var(--font-family);
+  font-weight: 700;
+}
+
+.app-btn-lg .warn {
+  font-size: var(--font-size-xs);
+}
+
+.app-btn-lg .icon {
+  font-size: 0;
+  width: calc(var(--gap) * 5);
+  display: grid;
+  place-content: center;
+}
+
+.app-btn-lg .icon svg path {
+  stroke: currentColor;
+}

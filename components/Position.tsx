@@ -4,17 +4,18 @@ import { NumberInput } from "./NumberInput";
 import produce from "immer";
 import { GrPowerReset } from "react-icons/gr";
 
-export default function Size() {
+export default function Position() {
   const [settings, update] = useAtom(settingsAtom);
   const isDefaultSettings =
-    settings.width.amt === 100 &&
-    settings.width.unit === "%" &&
-    settings.height.amt === 100 &&
-    settings.height.unit === "%";
+    settings.x.amt === 0 &&
+    settings.x.unit === "%" &&
+    settings.y.amt === 0 &&
+    settings.y.unit === "%";
+  console.log({ isDefaultSettings });
   return (
-    <section className="size">
+    <section className="position">
       <div className="section-header">
-        <h2>Size</h2>
+        <h2>Position</h2>
         <button
           className="app-btn"
           type="button"
@@ -22,10 +23,10 @@ export default function Size() {
           onClick={() => {
             update((s) =>
               produce(s, (draft) => {
-                draft.width.amt = 100;
-                draft.width.unit = "%";
-                draft.height.amt = 100;
-                draft.height.unit = "%";
+                draft.x.amt = 0;
+                draft.x.unit = "%";
+                draft.y.amt = 0;
+                draft.y.unit = "%";
               })
             );
           }}
@@ -35,23 +36,23 @@ export default function Size() {
         </button>
       </div>
       <label>
-        Width
+        X
         <NumberInput
-          value={settings.width.amt}
-          unit={settings.width.unit}
-          inputId="Width"
-          label="Width"
+          value={settings.x.amt}
+          unit={settings.x.unit}
+          inputId="X"
+          label="Background Position X"
           updateAmt={(amt) =>
             update(
               produce(settings, (draft) => {
-                draft.width.amt = amt;
+                draft.x.amt = amt;
               })
             )
           }
           updateUnit={(unit) =>
             update(
               produce(settings, (draft) => {
-                draft.width.unit = unit;
+                draft.x.unit = unit;
               })
             )
           }
@@ -59,23 +60,23 @@ export default function Size() {
         />
       </label>
       <label>
-        Height
+        Y
         <NumberInput
-          value={settings.height.amt}
-          unit={settings.height.unit}
-          inputId="Height"
-          label="Height"
+          value={settings.y.amt}
+          unit={settings.y.unit}
+          inputId="Y"
+          label="Background Position Y"
           updateAmt={(amt) =>
             update(
               produce(settings, (draft) => {
-                draft.height.amt = amt;
+                draft.y.amt = amt;
               })
             )
           }
           updateUnit={(unit) =>
             update(
               produce(settings, (draft) => {
-                draft.height.unit = unit;
+                draft.y.unit = unit;
               })
             )
           }

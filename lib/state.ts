@@ -6,13 +6,24 @@ import { PresetColor } from "react-color/lib/components/sketch/Sketch";
 import { AppState } from "./types";
 import { generateLayer } from "./generateLayer";
 import { blendModes } from "./constants";
+import { inflate } from "pako";
+
+const LOCAL_STORAGE_KEY_BASE = "art-of-the-gradient";
+export const SETTINGS_KEY = "settings";
+export const LAYERS_KEY = "layers";
+export function keyWithPath(
+  key: string,
+  path: string = typeof window !== "undefined" ? window.location.pathname : ""
+) {
+  return LOCAL_STORAGE_KEY_BASE + path + key;
+}
 
 export function rgba(c: ColorResult["rgb"]) {
   return `rgba(${c.r}, ${c.g}, ${c.b}, ${c.a})`;
 }
 
 export const settingsAtom = atomWithStorage<AppState["settings"]>(
-  "css-gradient-settings",
+  keyWithPath(SETTINGS_KEY),
   (() => {
     // random blend mode
     const blend = blendModes[Math.floor(Math.random() * blendModes.length)];
@@ -25,8 +36,30 @@ export const settingsAtom = atomWithStorage<AppState["settings"]>(
     };
   })()
 );
-export const layersAtom = atomWithStorage<AppState["layers"]>(
-  "css-gradient-layers",
+settingsAtom.onMount = (set) => {
+  const dataStr = new URLSearchParams(window.location.search).get("data");
+  if (!dataStr) {
+    set((it) => it);
+    return;
+  }
+  const data = JSON.parse(
+    inflate(dataStr.split("-").map(parseFloat), { to: "string" })
+  ) as AppState;
+  set(data.settings);
+};
+
+export const layersAtom = atom<AppState["layers"]>([]);
+layersAtom.onMount = (set) => {
+  const dataStr = new URLSearchParams(window.location.search).get("data");
+  if (!dataStr) return;
+  const data = JSON.parse(
+    inflate(dataStr.split("-").map(parseFloat), { to: "string" })
+  ) as AppState;
+  set(data.layers);
+};
+
+export const layersAtomWithStorage = atomWithStorage<AppState["layers"]>(
+  keyWithPath(LAYERS_KEY),
   (() => {
     const numLayers = Math.floor(Math.random() * 3) + 1;
     const layers: AppState["layers"] = [];
@@ -36,19 +69,30 @@ export const layersAtom = atomWithStorage<AppState["layers"]>(
     return layers;
   })()
 );
-export const layerAtomAtoms = splitAtom(layersAtom);
+layersAtomWithStorage.onMount = (set) => {
+  const dataStr = new URLSearchParams(window.location.search).get("data");
+  if (!dataStr) return;
+  const data = JSON.parse(
+    inflate(dataStr.split("-").map(parseFloat), { to: "string" })
+  ) as AppState;
+  set(data.layers);
+};
+export const layerAtomAtoms = splitAtom(layersAtomWithStorage);
 
 export const allColorsAtom = atom((get) => {
-  return get(layersAtom).reduce<PresetColor[]>((acc, layer, layerIndex) => {
-    return acc.concat(
-      layer.colors.map((color, colorIndex) => {
-        return {
-          title: `Layer ${layerIndex} Color ${colorIndex}`,
-          color: `${rgba(color.color)}`,
-        };
-      })
-    );
-  }, []);
+  return get(layersAtomWithStorage).reduce<PresetColor[]>(
+    (acc, layer, layerIndex) => {
+      return acc.concat(
+        layer.colors.map((color, colorIndex) => {
+          return {
+            title: `Layer ${layerIndex} Color ${colorIndex}`,
+            color: `${rgba(color.color)}`,
+          };
+        })
+      );
+    },
+    []
+  );
 });
 
 function mergeDistances(d: string[]) {
@@ -168,7 +212,7 @@ export function getBackgroundCssFromGradients(gradients: AppState["layers"]) {
 }
 
 export const backgroundCssAtom = atom((get) => {
-  let gradients = get(layersAtom).filter((layer) => layer.active);
+  let gradients = get(layersAtomWithStorage).filter((layer) => layer.active);
   return getBackgroundCssFromGradients(gradients);
 });
 
