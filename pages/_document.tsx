@@ -12,6 +12,22 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta property="og:title" content="L'art du dégradé" key="title" />
+          <meta
+            property="og:description"
+            content="Your go-to gizmo for generating goofy gradients"
+            key="description"
+          />
+          <meta
+            property="twitter:card"
+            content="summary_large_image"
+            key="twitter:card"
+          />
+          <meta
+            property="twitter:site"
+            content="@tone_row_"
+            key="twitter:site"
+          />
           <link
             href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
             rel="stylesheet"

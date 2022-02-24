@@ -2,7 +2,7 @@
 
 # L'art du dégradé (The Art of the Gradient)
 
-### Your go-to gizmo for generating goofy gradients.
+### Your go-to gizmo for generating goofy gradients
 
 Voici 👉 https://art-of-the-gradient.tone-row.com/
 
@@ -51,6 +51,7 @@ Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 - ~~drag getting stuck and can't be turned off~~
 - ~~camille had issue with switching to conic not working for one specific color~~
 - ~~adding layer is broken~~
+- make sure to add default meta tags for normal page too
 - Tweet Link - modal with the link and example text "I made this. wby?"
 - add background attachment option
 - add nice open graph image and tags
