@@ -11,7 +11,6 @@ export default function Position() {
     settings.x.unit === "%" &&
     settings.y.amt === 0 &&
     settings.y.unit === "%";
-  console.log({ isDefaultSettings });
   return (
     <section className="position">
       <div className="section-header">

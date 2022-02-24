@@ -1,6 +1,6 @@
-# L'art du dégradé
+# L'art du dégradé (The Art of the Gradient)
 
-The Art of the Gradient. A _trippy_ CSS Gradient Generator
+The go to gizmo for generating goofy gradients.
 
 #### Remaining To Do's (DELETE ME)
 
@@ -17,9 +17,9 @@ The Art of the Gradient. A _trippy_ CSS Gradient Generator
 - ~~reset button appeared disabled when it shouldn't be~~
 - ~~why is rotating thing displaying on mobile~~
 - ~~set up clone button~~
+- make README
 - Tweet Link - modal with the link and example text "I made this. wby?"
 - add background attachment option
-- make README
 - add nice open graph image and tags
 - add analytics
 - add favicon
@@ -28,3 +28,6 @@ The Art of the Gradient. A _trippy_ CSS Gradient Generator
 - figure out why increase arrow gets hover style
 - now you can't have 0 when editing the inputs..., that's no fun
 - add change color everywhere option
+- drag getting stuck and can't be turned off
+- camille had issue with switching to conic not working for one specific color
+- adding layer is broken
