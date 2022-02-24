@@ -47,7 +47,10 @@ Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 - ~~reset button appeared disabled when it shouldn't be~~
 - ~~why is rotating thing displaying on mobile~~
 - ~~set up clone button~~
-- make README
+- ~~make README~~
+- ~~drag getting stuck and can't be turned off~~
+- ~~camille had issue with switching to conic not working for one specific color~~
+- ~~adding layer is broken~~
 - Tweet Link - modal with the link and example text "I made this. wby?"
 - add background attachment option
 - add nice open graph image and tags
@@ -58,6 +61,3 @@ Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 - figure out why increase arrow gets hover style
 - now you can't have 0 when editing the inputs..., that's no fun
 - add change color everywhere option
-- drag getting stuck and can't be turned off
-- camille had issue with switching to conic not working for one specific color
-- adding layer is broken

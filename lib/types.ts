@@ -18,9 +18,11 @@ export type BlendMode =
   | "color"
   | "luminosity";
 
+export type Unit = "px" | "%" | "deg" | "turn";
+
 export type Amount = {
   amt: number;
-  unit: "px" | "%" | "deg" | "turn";
+  unit: Unit;
 };
 
 export type LayerType =

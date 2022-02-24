@@ -14,7 +14,7 @@ import {
 import VisuallyHidden from "@reach/visually-hidden";
 import { Plus } from "./icons/Plus.svg";
 import { RGBColor, SketchPicker } from "react-color";
-import { AppState, Amount } from "../lib/types";
+import { AppState, Amount, Unit } from "../lib/types";
 import { NumberInput, Options } from "./NumberInput";
 import { MdDragIndicator } from "react-icons/md";
 import { BsTrash2 } from "react-icons/bs";
@@ -28,8 +28,8 @@ import { backgroundTypes } from "../lib/constants";
 import { randomColor } from "../lib/generateLayer";
 
 const rotationUnitTypes = ["conic", "repeating-conic"];
-const rotationUnits = ["deg", "turn"];
-const nonRotationUnits = ["px", "%"];
+const rotationUnits: Unit[] = ["deg", "turn"];
+const nonRotationUnits: Unit[] = ["px", "%"];
 
 const UPDATES_PER_SECOND = 3;
 export const Layer = memo(
@@ -67,14 +67,16 @@ export const Layer = memo(
                 rotationUnits.includes(color.size.unit))
             ) {
               let last = color.size.unit;
-              color.size.unit = lastUnits.current[i];
+              color.size.unit = options.includes(lastUnits.current[i])
+                ? lastUnits.current[i]
+                : options[0];
               lastUnits.current[i] = last;
             }
             i++;
           }
         });
       });
-    }, [layerIndex, shouldUseRotationUnits, updateLayers]);
+    }, [layerIndex, options, shouldUseRotationUnits, updateLayers]);
 
     return (
       <div
