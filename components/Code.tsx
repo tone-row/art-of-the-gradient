@@ -15,6 +15,7 @@ import prettier from "prettier";
 import parserCss from "prettier/parser-postcss";
 import init, { transform } from "https://unpkg.com/@parcel/css-wasm";
 import pako from "pako";
+import { Twitter } from "./icons/Twitter.svg";
 
 const _isParcelReadyAtom = atom(false);
 const isParcelReadyAtom = atom(
@@ -83,17 +84,43 @@ const shareLinkAtom = atom((get) => {
   return `${getBaseURL()}/share?${searchParams}`;
 });
 
+const DEFAULT_TWEETS = [
+  "Check out this gradient! @tone_row_",
+  "Check out this CSS Gradient Generator by @tone_row_",
+];
+const tweetLinkAtom = atom((get) => {
+  const url = get(shareLinkAtom);
+  // get random default
+  const text =
+    DEFAULT_TWEETS[Math.floor(Math.random() * DEFAULT_TWEETS.length)];
+  const searchParams = new URLSearchParams({
+    url,
+    text,
+  });
+  return `https://twitter.com/intent/tweet?${searchParams}`;
+});
+
 type CopyState = { loading: boolean; copied: boolean };
 export function Code() {
   const [shareLink] = useAtom(shareLinkAtom);
   useAtom(isParcelReadyAtom);
   const [codeString] = useAtom(codeStringAtomWithStorage);
+  const [tweetLink] = useAtom(tweetLinkAtom);
   return (
     <section className="code">
       <div className="section-header">
         <h2>Code</h2>
         <CopyButton text="Copy CSS" toCopy={codeString} />
         <CopyButton text="Copy Share Link" toCopy={shareLink} />
+        <a
+          className="app-btn"
+          href={tweetLink}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <Twitter width={12} />
+          <span>Tweet</span>
+        </a>
       </div>
       <SyntaxHighlighter language="css" style={vs} className="codeblock">
         {codeString}
