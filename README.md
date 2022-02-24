@@ -2,7 +2,7 @@
 
 # L'art du dégradé (The Art of the Gradient)
 
-## The go-to gizmo for generating goofy gradients.
+### Your go-to gizmo for generating goofy gradients.
 
 Voici 👉 https://art-of-the-gradient.tone-row.com/
 
@@ -21,6 +21,8 @@ CSS transformer - https://github.com/parcel-bundler/parcel-css
 Accessible components - https://github.com/radix-ui/primitives
 
 Color picker - https://github.com/casesandberg/react-color
+
+Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 
 ## Connect
 
