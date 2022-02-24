@@ -22,3 +22,5 @@ The Art of the Gradient is a trippy CSS Gradient Generator
 - add tests for each thing you can manipulate per style
 - figure out why increase arrow gets hover style
 - add background attachment option
+- reset button appeared disabled when it shouldn't be
+- now you can't have 0 when editing the inputs..., that's no fun

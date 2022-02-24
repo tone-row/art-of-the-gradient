@@ -6,12 +6,15 @@ import {
   backgroundCssAtom,
   backgroundPositionAtom,
   backgroundSizeAtom,
+  getBaseURL,
+  layersAtom,
   settingsAtom,
 } from "../lib/state";
 import { AiOutlineCheck } from "react-icons/ai";
 import prettier from "prettier";
 import parserCss from "prettier/parser-postcss";
 import init, { transform } from "https://unpkg.com/@parcel/css-wasm";
+import pako from "pako";
 
 const _isParcelReadyAtom = atom(false);
 const isParcelReadyAtom = atom(
@@ -63,44 +66,62 @@ async function copyCode(code: string) {
   return;
 }
 
+const shareLinkAtom = atom((get) => {
+  const settings = get(settingsAtom);
+  const layers = get(layersAtom);
+  const compressed = pako
+    .deflate(JSON.stringify({ settings, layers }))
+    .toString()
+    .replace(/,/g, "-");
+  // new searchparams
+  const searchParams = new URLSearchParams({
+    data: compressed,
+  });
+  return `${getBaseURL()}?${searchParams}`;
+});
+
 type CopyState = { loading: boolean; copied: boolean };
 export function Code() {
+  const [shareLink] = useAtom(shareLinkAtom);
   useAtom(isParcelReadyAtom);
   const [codeString] = useAtom(codeStringAtom);
-  const [copyState, dispatch] = useReducer(
-    (state: CopyState, action: Partial<CopyState>) => ({ ...state, ...action }),
-    { loading: false, copied: false }
-  );
   return (
     <section className="code">
       <div className="section-header">
         <h2>Code</h2>
-        <button
-          className="app-btn"
-          onClick={() => {
-            dispatch({ loading: true });
-            copyCode(codeString).then(() => {
-              dispatch({ loading: false, copied: true });
-              // Reset After 5 Seconds
-              setTimeout(() => {
-                dispatch({ copied: false });
-              }, 5000);
-            });
-          }}
-        >
-          {copyState.copied ? <AiOutlineCheck size={14} /> : null}
-          <span>
-            {copyState.loading
-              ? "..."
-              : copyState.copied
-              ? "Copied"
-              : "Copy CSS"}
-          </span>
-        </button>
+        <CopyButton text="Copy CSS" toCopy={codeString} />
+        <CopyButton text="Copy Share Link" toCopy={shareLink} />
       </div>
       <SyntaxHighlighter language="css" style={vs} className="codeblock">
         {codeString}
       </SyntaxHighlighter>
     </section>
+  );
+}
+
+function CopyButton({ text, toCopy }: { text: string; toCopy: string }) {
+  const [copyState, dispatch] = useReducer(
+    (state: CopyState, action: Partial<CopyState>) => ({ ...state, ...action }),
+    { loading: false, copied: false }
+  );
+  return (
+    <button
+      className="app-btn"
+      onClick={() => {
+        dispatch({ loading: true });
+        copyCode(toCopy).then(() => {
+          dispatch({ loading: false, copied: true });
+          // Reset After 5 Seconds
+          setTimeout(() => {
+            dispatch({ copied: false });
+          }, 5000);
+        });
+      }}
+    >
+      {copyState.copied ? <AiOutlineCheck size={14} /> : null}
+      <span>
+        {copyState.loading ? "..." : copyState.copied ? "Copied" : text}
+      </span>
+    </button>
   );
 }

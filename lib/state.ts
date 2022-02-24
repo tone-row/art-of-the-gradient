@@ -172,14 +172,18 @@ export const backgroundCssAtom = atom((get) => {
   return getBackgroundCssFromGradients(gradients);
 });
 
+export const getBackgroundSizeAtom = (settings: AppState["settings"]) =>
+  `${settings.width.amt}${settings.width.unit} ${settings.height.amt}${settings.height.unit}`;
 export const backgroundSizeAtom = atom((get) => {
   const settings = get(settingsAtom);
-  return `${settings.width.amt}${settings.width.unit} ${settings.height.amt}${settings.height.unit}`;
+  return getBackgroundSizeAtom(settings);
 });
 
+export const getBackgroundPositionAtom = (settings: AppState["settings"]) =>
+  `${settings.x.amt}${settings.x.unit} ${settings.y.amt}${settings.y.unit}`;
 export const backgroundPositionAtom = atom((get) => {
   const settings = get(settingsAtom);
-  return `${settings.x.amt}${settings.x.unit} ${settings.y.amt}${settings.y.unit}`;
+  return getBackgroundPositionAtom(settings);
 });
 
 export function randomId(existing: string[] = []) {
@@ -189,3 +193,10 @@ export function randomId(existing: string[] = []) {
   }
   return id;
 }
+
+export const getBaseURL = () => {
+  const baseURL = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : "http://localhost:3000";
+  return baseURL;
+};
