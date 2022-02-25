@@ -62,3 +62,4 @@ Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 - figure out why increase arrow gets hover style
 - now you can't have 0 when editing the inputs..., that's no fun
 - add change color everywhere option
+- add a warning when open in more than one tab (On the root path / only, not on shared paths)
