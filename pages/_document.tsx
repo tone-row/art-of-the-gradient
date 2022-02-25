@@ -1,5 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
+import { Analytics } from "../components/Analytics";
 import { GetServerSideProps } from "next";
 import { getBaseURL } from "../lib/state";
 import { resetServerContext } from "react-beautiful-dnd";
@@ -60,6 +61,8 @@ class MyDocument extends Document {
       }`,
             }}
           />
+
+          <Analytics />
         </Head>
         <body>
           <Main />
