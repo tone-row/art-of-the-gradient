@@ -1,5 +1,4 @@
 import "modern-normalize";
-
 import "../styles/globals.css";
 import "../styles/Blend.css";
 import "../styles/Code.css";
@@ -10,7 +9,8 @@ import "../styles/NumberInput.css";
 import "../styles/Size.css";
 import "../styles/ToggleControls.css";
 import "../styles/Toggle.svg.css";
-import "../styles/ShareOptions.css";
+import "../styles/CloneOptions.css";
+import "../styles/Share.css";
 
 import type { AppProps } from "next/app";
 

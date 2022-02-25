@@ -290,11 +290,12 @@ section.code {
   margin: 0;
   padding: var(--gap) 0;
   border-radius: var(--border-radius);
-  align-items: start;
+  align-items: center;
   color: var(--grey-3);
   justify-content: start;
   cursor: pointer;
   text-decoration: none;
+  width: 100%;
 }
 
 .app-btn-lg:hover {
@@ -329,4 +330,10 @@ section.code {
 
 .app-btn-lg .icon svg path {
   stroke: currentColor;
+}
+
+section.support {
+  grid-auto-flow: column;
+  gap: var(--gap-sm);
+  justify-content: start;
 }

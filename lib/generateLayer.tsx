@@ -1,7 +1,8 @@
-import { RGBColor } from "react-color";
-import { backgroundTypes, COLORS, defaultTypeSettings } from "./constants";
-import { randomId } from "./state";
 import { AppState, LayerType } from "./types";
+import { COLORS, backgroundTypes, defaultTypeSettings } from "./constants";
+
+import { RGBColor } from "react-color";
+import { randomId } from "./state";
 
 type Layer = AppState["layers"][number];
 

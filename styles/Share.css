@@ -1,0 +1,6 @@
+.share-section {
+  display: grid;
+  gap: var(--gap-sm);
+  grid-column: span 2;
+  margin-right: var(--gap);
+}

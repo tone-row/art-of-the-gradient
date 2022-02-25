@@ -1,12 +1,5 @@
-import { useAtom } from "jotai";
-import { animate } from "motion";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
-import { useState, useEffect, useRef, CSSProperties } from "react";
-import { Code } from "../components/Code";
-import ShareOptions from "../components/ShareOptions";
-import { Style } from "../components/Style";
-import { ToggleControls } from "../components/ToggleControls";
 import {
   backgroundCssAtom,
   backgroundPositionAtom,
@@ -14,6 +7,14 @@ import {
   getBaseURL,
   settingsAtom,
 } from "../lib/state";
+
+import CloneOptions from "../components/CloneOptions";
+import { Code } from "../components/Code";
+import Head from "next/head";
+import { Style } from "../components/Style";
+import { ToggleControls } from "../components/ToggleControls";
+import { animate } from "motion";
+import { useAtom } from "jotai";
 
 type PageProps = { ogImageUrl: string; isSharedGradient: boolean };
 
@@ -150,7 +151,7 @@ const Share: NextPage<PageProps> = ({ ogImageUrl, isSharedGradient }) => {
           />
         </section>
         <main>
-          <ShareOptions />
+          <CloneOptions />
           <Code />
         </main>
       </div>

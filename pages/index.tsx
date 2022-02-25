@@ -1,20 +1,22 @@
 import { CSSProperties, useEffect, useRef, useState } from "react";
-import type { NextPage } from "next";
-import Head from "next/head";
-import { animate } from "motion";
-
 import {
   backgroundCssAtom,
   backgroundPositionAtom,
   backgroundSizeAtom,
   settingsAtom,
 } from "../lib/state";
-import { useAtom } from "jotai";
-import { ToggleControls } from "../components/ToggleControls";
+
 import { Blend } from "../components/Blend";
-import dynamic from "next/dynamic";
 import { Code } from "../components/Code";
+import Head from "next/head";
+import type { NextPage } from "next";
+import Share from "../components/Share";
 import { Style } from "../components/Style";
+import { Support } from "../components/Support";
+import { ToggleControls } from "../components/ToggleControls";
+import { animate } from "motion";
+import dynamic from "next/dynamic";
+import { useAtom } from "jotai";
 
 const Layers = dynamic(() => import("../components/Layers"), {
   ssr: false,
@@ -137,6 +139,8 @@ const Home: NextPage = () => {
           <Position />
           <Size />
           <Code />
+          <Share />
+          <Support />
         </main>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import { GetServerSideProps, NextPage } from "next";
-import { inflate } from "pako";
-import { Style } from "../components/Style";
 import {
   getBackgroundCssFromGradients,
   getBackgroundPositionAtom,
   getBackgroundSizeAtom,
 } from "../lib/state";
+
 import { AppState } from "../lib/types";
+import { Style } from "../components/Style";
+import { inflate } from "pako";
 
 export const getServerSideProps: GetServerSideProps<
   {},

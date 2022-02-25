@@ -1,5 +1,6 @@
-import chromium from "chrome-aws-lambda";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import chromium from "chrome-aws-lambda";
 import puppeteer from "puppeteer-core";
 
 export default async function handler(

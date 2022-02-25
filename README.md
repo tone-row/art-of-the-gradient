@@ -51,15 +51,18 @@ Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 - ~~drag getting stuck and can't be turned off~~
 - ~~camille had issue with switching to conic not working for one specific color~~
 - ~~adding layer is broken~~
-- make sure to add default meta tags for normal page too
-- Tweet Link - modal with the link and example text "I made this. wby?"
-- add background attachment option
-- add nice open graph image and tags
+- ~~Tweet Link - modal with the link and example text "I made this. wby?"~~
+- ~~make sure to add default meta tags for normal page too~~
+- ~~add nice open graph image and tags~~
+- ~~add favicon~~
+- ~~make share/copy buttons big~~
+- ~~add star / support on github~~
+- the things you share is not heeding the "active" quality of layers
+- add a warning when open in more than one tab (On the root path / only, not on shared paths)
 - add analytics
-- add favicon
 - add tests for each thing you can manipulate per style
 - input dragging is really laggy
 - figure out why increase arrow gets hover style
 - now you can't have 0 when editing the inputs..., that's no fun
 - add change color everywhere option
-- add a warning when open in more than one tab (On the root path / only, not on shared paths)
+- add background attachment option

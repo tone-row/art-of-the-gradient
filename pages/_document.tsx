@@ -1,7 +1,8 @@
+import Document, { Head, Html, Main, NextScript } from "next/document";
+
 import { GetServerSideProps } from "next";
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { resetServerContext } from "react-beautiful-dnd";
 import { getBaseURL } from "../lib/state";
+import { resetServerContext } from "react-beautiful-dnd";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   resetServerContext();
@@ -10,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 const TITLE = "L'art du dégradé ~ The Art of the Gradient";
 const DESCRIPTION =
-  "A CSS Gradient Generator. Your go-to gizmo for generating goofy gradients";
+  "Your go-to gizmo for generating goofy gradients- i.e., a CSS Gradient Generator";
 const DEFAULT_IMAGE = `${getBaseURL()}/screenshot.png`;
 class MyDocument extends Document {
   render() {

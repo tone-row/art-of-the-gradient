@@ -2,11 +2,11 @@
 import { useAtom } from "jotai";
 import { GrClone, GrEdit } from "react-icons/gr";
 import {
+  LAYERS_KEY,
+  SETTINGS_KEY,
   keyWithPath,
   layersAtom,
-  LAYERS_KEY,
   settingsAtom,
-  SETTINGS_KEY,
 } from "../lib/state";
 import { AppState } from "../lib/types";
 
@@ -18,7 +18,7 @@ function clone(settings: AppState["settings"], layers: AppState["layers"]) {
   localStorage.setItem(keyWithPath(LAYERS_KEY, "/"), JSON.stringify(layers));
 }
 
-export default function ShareOptions() {
+export default function CloneOptions() {
   const [settings] = useAtom(settingsAtom);
   const [layers] = useAtom(layersAtom);
   return (

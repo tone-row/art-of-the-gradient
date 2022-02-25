@@ -1,11 +1,11 @@
-import { atom } from "jotai";
-import { splitAtom, atomWithStorage } from "jotai/utils";
+import { atomWithStorage, splitAtom } from "jotai/utils";
 
+import { AppState } from "./types";
 import { ColorResult } from "react-color";
 import { PresetColor } from "react-color/lib/components/sketch/Sketch";
-import { AppState } from "./types";
-import { generateLayer } from "./generateLayer";
+import { atom } from "jotai";
 import { blendModes } from "./constants";
+import { generateLayer } from "./generateLayer";
 import { inflate } from "pako";
 
 const LOCAL_STORAGE_KEY_BASE = "art-of-the-gradient";

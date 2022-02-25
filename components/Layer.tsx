@@ -3,9 +3,9 @@ import { allColorsAtom, layersAtomWithStorage, rgba } from "../lib/state";
 import produce from "immer";
 import {
   CSSProperties,
-  forwardRef,
   Fragment,
   HTMLAttributes,
+  forwardRef,
   memo,
   useEffect,
   useRef,
@@ -14,7 +14,7 @@ import {
 import VisuallyHidden from "@reach/visually-hidden";
 import { Plus } from "./icons/Plus.svg";
 import { RGBColor, SketchPicker } from "react-color";
-import { AppState, Amount, Unit } from "../lib/types";
+import { Amount, AppState, Unit } from "../lib/types";
 import { NumberInput, Options } from "./NumberInput";
 import { MdDragIndicator } from "react-icons/md";
 import { BsTrash2 } from "react-icons/bs";

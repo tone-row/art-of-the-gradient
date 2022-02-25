@@ -1,5 +1,6 @@
-import { RGBColor } from "react-color";
 import { AppState, BlendMode, LayerType } from "./types";
+
+import { RGBColor } from "react-color";
 
 export const backgroundTypes: { value: LayerType }[] = [
   {

@@ -1,21 +1,16 @@
 import { atom, useAtom } from "jotai";
-import { useReducer } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { vs } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 import {
   backgroundCssAtom,
   backgroundPositionAtom,
   backgroundSizeAtom,
-  getBaseURL,
-  layersAtomWithStorage,
   settingsAtom,
 } from "../lib/state";
-import { AiOutlineCheck } from "react-icons/ai";
-import prettier from "prettier";
-import parserCss from "prettier/parser-postcss";
 import init, { transform } from "https://unpkg.com/@parcel/css-wasm";
-import pako from "pako";
-import { Twitter } from "./icons/Twitter.svg";
+
+import SyntaxHighlighter from "react-syntax-highlighter";
+import parserCss from "prettier/parser-postcss";
+import prettier from "prettier";
+import { vs } from "react-syntax-highlighter/dist/cjs/styles/hljs";
 
 const _isParcelReadyAtom = atom(false);
 const isParcelReadyAtom = atom(
@@ -32,7 +27,7 @@ isParcelReadyAtom.onMount = (run) => {
   run();
 };
 
-const codeStringAtomWithStorage = atom((get) => {
+export const codeStringAtom = atom((get) => {
   let code = `background: ${get(backgroundCssAtom)}; background-size: ${get(
     backgroundSizeAtom
   )}; background-position: ${get(
@@ -61,97 +56,18 @@ const codeStringAtomWithStorage = atom((get) => {
     .join("\n");
 });
 
-// codeStringAtom
-// WITHOUT STORAGE
-
-async function copyCode(code: string) {
-  const clipboard = (await import("clipboardy")).default;
-  await clipboard.write(code);
-  return;
-}
-
-const shareLinkAtom = atom((get) => {
-  const settings = get(settingsAtom);
-  const layers = get(layersAtomWithStorage);
-  const compressed = pako
-    .deflate(JSON.stringify({ settings, layers }))
-    .toString()
-    .replace(/,/g, "-");
-  // new searchparams
-  const searchParams = new URLSearchParams({
-    data: compressed,
-  });
-  return `${getBaseURL()}/share?${searchParams}`;
-});
-
-const DEFAULT_TWEETS = [
-  "Check out this gradient! @tone_row_",
-  "Check out this CSS Gradient Generator by @tone_row_",
-];
-const tweetLinkAtom = atom((get) => {
-  const url = get(shareLinkAtom);
-  // get random default
-  const text =
-    DEFAULT_TWEETS[Math.floor(Math.random() * DEFAULT_TWEETS.length)];
-  const searchParams = new URLSearchParams({
-    url,
-    text,
-  });
-  return `https://twitter.com/intent/tweet?${searchParams}`;
-});
-
-type CopyState = { loading: boolean; copied: boolean };
 export function Code() {
-  const [shareLink] = useAtom(shareLinkAtom);
   useAtom(isParcelReadyAtom);
-  const [codeString] = useAtom(codeStringAtomWithStorage);
-  const [tweetLink] = useAtom(tweetLinkAtom);
+  const [codeString] = useAtom(codeStringAtom);
+
   return (
     <section className="code">
       <div className="section-header">
         <h2>Code</h2>
-        <CopyButton text="Copy CSS" toCopy={codeString} />
-        <CopyButton text="Copy Share Link" toCopy={shareLink} />
-        <a
-          className="app-btn"
-          href={tweetLink}
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Twitter width={12} />
-          <span>Tweet</span>
-        </a>
       </div>
       <SyntaxHighlighter language="css" style={vs} className="codeblock">
         {codeString}
       </SyntaxHighlighter>
     </section>
-  );
-}
-
-function CopyButton({ text, toCopy }: { text: string; toCopy: string }) {
-  const [copyState, dispatch] = useReducer(
-    (state: CopyState, action: Partial<CopyState>) => ({ ...state, ...action }),
-    { loading: false, copied: false }
-  );
-  return (
-    <button
-      className="app-btn"
-      onClick={() => {
-        dispatch({ loading: true });
-        copyCode(toCopy).then(() => {
-          dispatch({ loading: false, copied: true });
-          // Reset After 5 Seconds
-          setTimeout(() => {
-            dispatch({ copied: false });
-          }, 5000);
-        });
-      }}
-    >
-      {copyState.copied ? <AiOutlineCheck size={14} /> : null}
-      <span>
-        {copyState.loading ? "..." : copyState.copied ? "Copied" : text}
-      </span>
-    </button>
   );
 }
