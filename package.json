@@ -25,6 +25,7 @@
     "pako": "^2.0.4",
     "playwright-core": "^1.19.1",
     "prettier": "^2.5.1",
+    "puppeteer-core": "^13.4.0",
     "react": "17.0.2",
     "react-beautiful-dnd": "^13.1.0",
     "react-color": "^2.19.3",

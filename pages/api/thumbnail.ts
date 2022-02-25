@@ -1,2 +1,45 @@
-// @ts-nocheck
-import chromium from"chrome-aws-lambda";import playwright from"playwright-core";export default async function handler(e,a){const t=e.query.url;if(!t||"string"!=typeof t)return a.status(400).send("url is required");const r=await chromium.executablePath,i=await playwright.chromium.launch({args:chromium.args,executablePath:r,headless:chromium.headless}),o=await i.newPage({viewport:{width:1200,height:630}});await o.goto(t,{timeout:15e3});const s=await o.screenshot({type:"png"});await i.close(),a.setHeader("Cache-Control","s-maxage=31536000, stale-while-revalidate"),a.setHeader("Content-Type","image/png"),a.end(s)}
+import chromium from "chrome-aws-lambda";
+import { NextApiRequest, NextApiResponse } from "next";
+import puppeteer from "puppeteer-core";
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const url = req.query["url"];
+  if (!url || typeof url !== "string")
+    return res.status(400).send("url is required");
+
+  let browser = null;
+  let rawScreenshot = null;
+  try {
+    browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+    });
+
+    const page = await browser.newPage();
+    await page.setViewport({
+      width: 1200,
+      height: 630,
+    });
+    await page.goto(url, {});
+
+    rawScreenshot = await page.screenshot({});
+    await page.close();
+  } catch (e) {
+    console.error(e);
+    res.status(500).send((e as Error).message);
+  } finally {
+    if (browser !== null) {
+      await browser.close();
+    }
+  }
+
+  // Set the s-maxage property which caches the images then on the Vercel edge
+  res.setHeader("Cache-Control", "s-maxage=31536000, stale-while-revalidate");
+  res.setHeader("Content-Type", "image/png");
+  // write the image to the response with the specified Content-Type
+  res.end(rawScreenshot);
+}
