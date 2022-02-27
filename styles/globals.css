@@ -333,7 +333,8 @@ section.code {
 }
 
 section.support {
+  grid-column: span 2;
   grid-auto-flow: column;
   gap: var(--gap-sm);
-  justify-content: start;
+  justify-content: center;
 }

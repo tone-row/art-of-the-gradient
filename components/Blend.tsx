@@ -1,14 +1,14 @@
-import produce from "immer";
-import { useAtom } from "jotai";
-import { CSSProperties } from "react";
-import { settingsAtom } from "../lib/state";
-import { BlendMode } from "../lib/types";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 import * as Tooltip from "@radix-ui/react-tooltip";
 
-import * as RadioGroup from "@radix-ui/react-radio-group";
+import { BlendMode } from "../lib/types";
+import { CSSProperties } from "react";
 import { blendModes } from "../lib/constants";
+import produce from "immer";
+import { settingsAtom } from "../lib/state";
+import { useAtom } from "jotai";
 
-export function Blend() {
+export default function Blend() {
   const [settings, updateSettings] = useAtom(settingsAtom);
   return (
     <section className="blend">

@@ -1,6 +1,8 @@
+import * as Popover from "@radix-ui/react-popover";
+import * as RadioGroup from "@radix-ui/react-radio-group";
+
+import { Amount, AppState, Unit } from "../lib/types";
 import { Atom, useAtom } from "jotai";
-import { allColorsAtom, layersAtomWithStorage, rgba } from "../lib/state";
-import produce from "immer";
 import {
   CSSProperties,
   Fragment,
@@ -11,21 +13,27 @@ import {
   useRef,
   useState,
 } from "react";
-import VisuallyHidden from "@reach/visually-hidden";
-import { Plus } from "./icons/Plus.svg";
-import { RGBColor, SketchPicker } from "react-color";
-import { Amount, AppState, Unit } from "../lib/types";
 import { NumberInput, Options } from "./NumberInput";
-import { MdDragIndicator } from "react-icons/md";
-import { BsTrash2 } from "react-icons/bs";
+import { RGBColor, SketchPicker } from "react-color";
+import {
+  allColorsAtom,
+  layersAtomWithStorage,
+  randomId,
+  rgba,
+} from "../lib/state";
+
+import { CgCloseR } from "react-icons/cg";
 import { DraggableProvided } from "react-beautiful-dnd";
-import * as Popover from "@radix-ui/react-popover";
-import { Toggle } from "./icons/Toggle.svg";
+import { FiCopy } from "react-icons/fi";
 import { IoMdClose } from "react-icons/io";
-import * as RadioGroup from "@radix-ui/react-radio-group";
-import throttle from "lodash.throttle";
+import { MdDragIndicator } from "react-icons/md";
+import { Plus } from "./icons/Plus.svg";
+import { Toggle } from "./icons/Toggle.svg";
+import VisuallyHidden from "@reach/visually-hidden";
 import { backgroundTypes } from "../lib/constants";
+import produce from "immer";
 import { randomColor } from "../lib/generateLayer";
+import throttle from "lodash.throttle";
 
 const rotationUnitTypes = ["conic", "repeating-conic"];
 const rotationUnits: Unit[] = ["deg", "turn"];
@@ -106,7 +114,19 @@ export const Layer = memo(
             >
               <MdDragIndicator size={24} />
             </IconButton>
-            {layers.length > 1 ? (
+            <div className="layer-buttons">
+              <CopyLayer
+                handleClick={() => {
+                  updateLayers((layers) => {
+                    return produce(layers, (draft) => {
+                      draft.splice(layerIndex + 1, 0, {
+                        ...draft[layerIndex],
+                        id: randomId(),
+                      });
+                    });
+                  });
+                }}
+              />
               <DeleteLayer
                 layerIndex={layerIndex}
                 handleClick={() => {
@@ -117,9 +137,7 @@ export const Layer = memo(
                   });
                 }}
               />
-            ) : (
-              <span />
-            )}
+            </div>
           </aside>
           <div className="layer-lower">
             <div className="layer-color-list">
@@ -296,7 +314,7 @@ const DeleteLayer = memo(function DeleteLayer({
     <Popover.Root>
       <Popover.Trigger asChild>
         <IconButton aria-label={`Delete layer ${layerIndex}`}>
-          <BsTrash2 size={24} />
+          <CgCloseR size={24} />
         </IconButton>
       </Popover.Trigger>
       <Popover.Content className="popover">
@@ -783,3 +801,11 @@ const LayerTypeSettings = memo(function LayerTypeSettings({
       return null;
   }
 });
+
+function CopyLayer({ handleClick }: { handleClick: () => void }) {
+  return (
+    <IconButton onClick={handleClick} aria-label="Copy Layer">
+      <FiCopy size={24} />
+    </IconButton>
+  );
+}

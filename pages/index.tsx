@@ -6,7 +6,6 @@ import {
   settingsAtom,
 } from "../lib/state";
 
-import { Blend } from "../components/Blend";
 import { Code } from "../components/Code";
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -25,6 +24,10 @@ const Size = dynamic(() => import("../components/Size"), {
   ssr: false,
 });
 const Position = dynamic(() => import("../components/Position"), {
+  ssr: false,
+});
+
+const Blend = dynamic(() => import("../components/Blend"), {
   ssr: false,
 });
 

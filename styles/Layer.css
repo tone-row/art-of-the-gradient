@@ -32,7 +32,7 @@
 
 .layer-sidebar {
   grid-row: span 2;
-  background-color: var(--grey);
+  background-color: var(--grey-0);
   padding: 5px;
   border-radius: var(--border-radius);
   display: grid;
@@ -306,4 +306,10 @@
 .layer-color-wrapper:focus-within .delete-color,
 .layer-color-wrapper:hover .delete-color {
   opacity: 1;
+}
+
+.layer-buttons {
+  display: grid;
+  gap: var(--gap-sm);
+  font-size: 0;
 }
