@@ -26,6 +26,6 @@ Drag and drop - https://github.com/atlassian/react-beautiful-dnd
 
 ## Connect
 
-🐤🐤 http://twitter.com/tone_row_
+🐤🐤 [http://twitter.com/tone_row_](http://twitter.com/tone_row_)
 
 ## Made with ❤️ by [Tone Row](https://github.com/sponsors/tone-row) 💻
