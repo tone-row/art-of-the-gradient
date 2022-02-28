@@ -247,3 +247,7 @@ export const getBaseURL = () => {
       : "http://localhost:3000";
   return baseURL;
 };
+
+export const TITLE = "L'art du dégradé ~ The Art of the Gradient";
+export const DESCRIPTION =
+  "Your go-to gizmo for generating goofy gradients- i.e., a CSS Gradient Generator";

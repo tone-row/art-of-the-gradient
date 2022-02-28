@@ -3,6 +3,7 @@ import {
   backgroundCssAtom,
   backgroundPositionAtom,
   backgroundSizeAtom,
+  keyWithPath,
   settingsAtom,
 } from "../lib/state";
 
@@ -16,6 +17,8 @@ import { ToggleControls } from "../components/ToggleControls";
 import { animate } from "motion";
 import dynamic from "next/dynamic";
 import { useAtom } from "jotai";
+
+const IS_OPEN_IN_ANOTHER_TAB = keyWithPath("isOpen");
 
 const Layers = dynamic(() => import("../components/Layers"), {
   ssr: false,
@@ -36,6 +39,7 @@ const Home: NextPage = () => {
   const [size] = useAtom(backgroundSizeAtom);
   const [position] = useAtom(backgroundPositionAtom);
   const [settings] = useAtom(settingsAtom);
+  const [showOneTabWarning, setShowOneTabWarning] = useState(false);
 
   const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
@@ -87,6 +91,31 @@ const Home: NextPage = () => {
       );
     }
   }, [isVisible]);
+
+  // Only allow open in one tab
+  useEffect(() => {
+    // get local storage value
+    const isOpen = localStorage.getItem(IS_OPEN_IN_ANOTHER_TAB);
+    if (isOpen) return setShowOneTabWarning(true);
+
+    // set local storage value
+    localStorage.setItem(IS_OPEN_IN_ANOTHER_TAB, "true");
+
+    function onBeforeUnload() {
+      localStorage.removeItem(IS_OPEN_IN_ANOTHER_TAB);
+    }
+    window.addEventListener("beforeunload", onBeforeUnload);
+  }, []);
+
+  if (showOneTabWarning) {
+    return (
+      <div className="one-tab-warning">
+        <span>
+          L&#x27;art du dégradé works best when it&#x27;s only open in one tab
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div className="app" suppressHydrationWarning={true}>

@@ -162,7 +162,6 @@
   width: 45px;
   border: none;
   background: var(--grey);
-  border-radius: 45px;
 }
 
 .fade-btn.active {

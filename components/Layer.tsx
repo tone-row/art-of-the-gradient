@@ -366,11 +366,6 @@ const LayerColor = memo(function LayerColor({
         <Popover.Content
           className="color-popover"
           onOpenAutoFocus={(e) => e.preventDefault()}
-          onKeyDown={(e) => {
-            if (e.key === "h") {
-              console.log("hi");
-            }
-          }}
         >
           <SketchPicker
             color={c}
