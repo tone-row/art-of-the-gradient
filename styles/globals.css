@@ -338,20 +338,3 @@ section.support {
   gap: var(--gap-sm);
   justify-content: start;
 }
-
-.one-tab-warning {
-  display: grid;
-  gap: var(--gap-sm);
-  grid-auto-flow: column;
-  place-content: center;
-  font-size: var(--font-size);
-  font-family: var(--font-family);
-  font-weight: 700;
-  color: var(--grey-2);
-  background-color: var(--grey--1);
-  border-radius: var(--border-radius);
-  padding: var(--gap-sm);
-  line-height: 1;
-  white-space: nowrap;
-  height: 100vh;
-}

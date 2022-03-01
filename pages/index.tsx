@@ -24,8 +24,6 @@ const DESCRIPTION =
   "Your go-to gizmo for generating goofy gradients- i.e., a CSS Gradient Generator";
 const DEFAULT_IMAGE = `${getBaseURL()}/screenshot.png`;
 
-const IS_OPEN_IN_ANOTHER_TAB = keyWithPath("isOpen");
-
 const Layers = dynamic(() => import("../components/Layers"), {
   ssr: false,
 });
@@ -45,8 +43,7 @@ const Home: NextPage = () => {
   const [size] = useAtom(backgroundSizeAtom);
   const [position] = useAtom(backgroundPositionAtom);
   const [settings] = useAtom(settingsAtom);
-  const [showOneTabWarning, setShowOneTabWarning] = useState(false);
-
+  const [showInterface, setShowInterface] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   useEffect(() => {
     // catch h key
@@ -98,29 +95,24 @@ const Home: NextPage = () => {
     }
   }, [isVisible]);
 
-  // Only allow open in one tab
   useEffect(() => {
-    // get local storage value
-    const isOpen = localStorage.getItem(IS_OPEN_IN_ANOTHER_TAB);
-    if (isOpen) return setShowOneTabWarning(true);
-
-    // set local storage value
-    localStorage.setItem(IS_OPEN_IN_ANOTHER_TAB, "true");
-
-    function onBeforeUnload() {
-      localStorage.removeItem(IS_OPEN_IN_ANOTHER_TAB);
+    function onVisibilityChange() {
+      if (document.hidden) {
+        // localStorage.removeItem(IS_OPEN_IN_ANOTHER_TAB);
+        return setShowInterface(true);
+      }
+      setShowInterface(false);
     }
-    window.addEventListener("beforeunload", onBeforeUnload);
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
   }, []);
 
-  if (showOneTabWarning) {
-    return (
-      <div className="one-tab-warning">
-        <span>
-          L&#x27;art du dégradé works best when it&#x27;s only open in one tab
-        </span>
-      </div>
-    );
+  // Don't render interface if another tab is open
+  if (showInterface) {
+    return null;
   }
 
   return (
