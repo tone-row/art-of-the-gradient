@@ -97,13 +97,19 @@ const Share: NextPage<PageProps> = ({ ogImageUrl, isSharedGradient }) => {
   return (
     <div className="app" suppressHydrationWarning={true}>
       <Head>
-        <title>L&#x27;art du dégradé ~ Shared</title>
+        <title>Art of the Gradient</title>
+        <meta name="og:title" content={"Art of the Gradient"} />
+        <meta name="twitter:title" content={"Art of the Gradient"} />
+        <meta name="twitter:text:title" content={"Art of the Gradient"} />
+
         <meta name="description" content={DESCRIPTION} />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="twitter:description" content={DESCRIPTION} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+
         <meta property="og:image" content={ogImageUrl} key="og:image" />
         <meta name="twitter:image" content={ogImageUrl} key="twitter:image" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:description" content={DESCRIPTION} />
+
         <meta
           property="twitter:image:alt"
           content="CSS Gradient"
