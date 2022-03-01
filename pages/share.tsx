@@ -102,6 +102,8 @@ const Share: NextPage<PageProps> = ({ ogImageUrl, isSharedGradient }) => {
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:image" content={ogImageUrl} key="og:image" />
         <meta name="twitter:image" content={ogImageUrl} key="twitter:image" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:description" content={DESCRIPTION} />
         <meta
           property="twitter:image:alt"
           content="CSS Gradient"
