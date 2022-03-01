@@ -3,6 +3,7 @@ import {
   backgroundCssAtom,
   backgroundPositionAtom,
   backgroundSizeAtom,
+  getBaseURL,
   keyWithPath,
   settingsAtom,
 } from "../lib/state";
@@ -17,6 +18,11 @@ import { ToggleControls } from "../components/ToggleControls";
 import { animate } from "motion";
 import dynamic from "next/dynamic";
 import { useAtom } from "jotai";
+
+const TITLE = "L'art du dégradé ~ The Art of the Gradient";
+const DESCRIPTION =
+  "Your go-to gizmo for generating goofy gradients- i.e., a CSS Gradient Generator";
+const DEFAULT_IMAGE = `${getBaseURL()}/screenshot.png`;
 
 const IS_OPEN_IN_ANOTHER_TAB = keyWithPath("isOpen");
 
@@ -121,6 +127,29 @@ const Home: NextPage = () => {
     <div className="app" suppressHydrationWarning={true}>
       <Head>
         <title>L&#x27;art du dégradé ~ The Art of the Gradient</title>
+        <meta name="description" content={DESCRIPTION} />
+        <meta property="og:title" content={TITLE} key="title" />
+        <meta
+          property="og:description"
+          content={DESCRIPTION}
+          key="description"
+        />
+        <meta property="og:image" content={DEFAULT_IMAGE} key="og:image" />
+        <meta
+          name="twitter:image"
+          content={DEFAULT_IMAGE}
+          key="twitter:image"
+        />
+        <meta
+          property="twitter:image:alt"
+          content="CSS Gradient"
+          key="twitter:image:alt"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@tone_row_" />
+        <meta name="twitter:creator" content="@rob______gordon" />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
       <Style
         css={`
