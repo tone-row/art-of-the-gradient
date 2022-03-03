@@ -82,6 +82,33 @@ const randomLayers: Record<
         },
       ],
     },
+    {
+      colors: [
+        {
+          blend: true,
+          size: {
+            amt: 33,
+            unit: "%",
+          },
+        },
+        {
+          blend: true,
+          size: {
+            amt: 66,
+            unit: "%",
+          },
+        },
+      ],
+      typeSettings: {
+        ...defaultTypeSettings,
+        linear: {
+          angle: {
+            amt: 0,
+            unit: "deg",
+          },
+        },
+      },
+    },
   ],
   "repeating-linear": [
     {
@@ -120,9 +147,20 @@ const randomLayers: Record<
       post: (layer) => {
         const newColors = layer.colors.slice(0);
         newColors[2].color = newColors[0].color;
+        const typeSettings = {
+          ...layer.typeSettings,
+          repeatingLinear: {
+            ...layer.typeSettings.repeatingLinear,
+            angle: {
+              ...layer.typeSettings.repeatingLinear.angle,
+              amt: Math.floor(Math.random() * 360),
+            },
+          },
+        };
         return {
           ...layer,
           colors: newColors,
+          typeSettings,
         };
       },
     },
@@ -155,6 +193,38 @@ const randomLayers: Record<
           },
           y: {
             amt: 50,
+            unit: "%",
+          },
+        },
+      },
+    },
+    {
+      colors: [
+        {
+          blend: true,
+          size: {
+            amt: 14,
+            unit: "%",
+          },
+        },
+        {
+          blend: true,
+          size: {
+            amt: 1,
+            unit: "%",
+          },
+        },
+      ],
+      typeSettings: {
+        ...defaultTypeSettings,
+        radial: {
+          shape: "circle",
+          x: {
+            amt: 50,
+            unit: "%",
+          },
+          y: {
+            amt: 23,
             unit: "%",
           },
         },
@@ -201,6 +271,53 @@ const randomLayers: Record<
         },
       },
     },
+    {
+      colors: [
+        {
+          blend: true,
+          size: {
+            amt: 5,
+            unit: "px",
+          },
+        },
+        {
+          blend: true,
+          size: {
+            amt: 5,
+            unit: "px",
+          },
+        },
+        {
+          blend: true,
+          size: {
+            amt: 40,
+            unit: "px",
+          },
+        },
+      ],
+      typeSettings: {
+        ...defaultTypeSettings,
+        repeatingRadial: {
+          shape: "circle",
+          x: {
+            amt: 50,
+            unit: "%",
+          },
+          y: {
+            amt: -200,
+            unit: "%",
+          },
+        },
+      },
+      post: (layer) => {
+        const newColors = layer.colors.slice(0);
+        newColors[2].color = newColors[0].color;
+        return {
+          ...layer,
+          colors: newColors,
+        };
+      },
+    },
   ],
   conic: [
     {
@@ -233,6 +350,48 @@ const randomLayers: Record<
           },
           y: {
             amt: 0,
+            unit: "%",
+          },
+        },
+      },
+    },
+    {
+      colors: [
+        {
+          blend: true,
+          size: {
+            amt: 30,
+            unit: "deg",
+          },
+        },
+        {
+          blend: true,
+          size: {
+            amt: 30,
+            unit: "deg",
+          },
+        },
+        {
+          blend: true,
+          size: {
+            amt: 30,
+            unit: "deg",
+          },
+        },
+      ],
+      typeSettings: {
+        ...defaultTypeSettings,
+        conic: {
+          from: {
+            amt: 0,
+            unit: "deg",
+          },
+          x: {
+            amt: 0,
+            unit: "%",
+          },
+          y: {
+            amt: 100,
             unit: "%",
           },
         },
@@ -273,6 +432,56 @@ const randomLayers: Record<
           },
           x: {
             amt: 50,
+            unit: "%",
+          },
+          y: {
+            amt: 50,
+            unit: "%",
+          },
+        },
+      },
+      post: (layer) => {
+        const newColors = layer.colors.slice(0);
+        newColors[2].color = newColors[0].color;
+        return {
+          ...layer,
+          colors: newColors,
+        };
+      },
+    },
+    {
+      colors: [
+        {
+          blend: false,
+          size: {
+            amt: 3,
+            unit: "deg",
+          },
+        },
+        {
+          blend: false,
+          size: {
+            amt: 3,
+            unit: "deg",
+          },
+        },
+        {
+          blend: false,
+          size: {
+            amt: 3,
+            unit: "deg",
+          },
+        },
+      ],
+      typeSettings: {
+        ...defaultTypeSettings,
+        repeatingConic: {
+          from: {
+            amt: 0,
+            unit: "deg",
+          },
+          x: {
+            amt: -10,
             unit: "%",
           },
           y: {

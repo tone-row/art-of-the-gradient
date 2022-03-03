@@ -1,16 +1,18 @@
 import { atom, useAtom } from "jotai";
 import { getBaseURL, layersAtomWithStorage, settingsAtom } from "../lib/state";
+import { useReducer, useState } from "react";
 
 import { AiOutlineCheck } from "react-icons/ai";
 import { BiCodeCurly } from "react-icons/bi";
+import { BsFillFileImageFill } from "react-icons/bs";
 import { FiCodepen } from "react-icons/fi";
+import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { IoMdShare } from "react-icons/io";
 import { Twitter } from "./icons/Twitter.svg";
 import { codeStringAtom } from "./Code";
 import pako from "pako";
-import { useReducer } from "react";
 
-const shareLinkAtom = atom((get) => {
+const searchParamsAtom = atom<URLSearchParams>((get) => {
   const settings = get(settingsAtom);
   const layers = get(layersAtomWithStorage);
   const compressed = pako
@@ -18,9 +20,12 @@ const shareLinkAtom = atom((get) => {
     .toString()
     .replace(/,/g, "-");
   // new searchparams
-  const searchParams = new URLSearchParams({
+  return new URLSearchParams({
     data: compressed,
   });
+});
+const shareLinkAtom = atom((get) => {
+  const searchParams = get(searchParamsAtom);
   return `${getBaseURL()}/share?${searchParams}`;
 });
 
@@ -40,6 +45,13 @@ const tweetLinkAtom = atom((get) => {
   return `https://twitter.com/intent/tweet?${searchParams}`;
 });
 
+const downloadLinkAtom = atom((get) => {
+  const searchParams = get(searchParamsAtom);
+  return `${getBaseURL()}/api/thumbnail?url=${encodeURIComponent(
+    `${getBaseURL()}/preview?${searchParams}`
+  )}`;
+});
+
 export default function Share() {
   const [shareLink] = useAtom(shareLinkAtom);
   const [tweetLink] = useAtom(tweetLinkAtom);
@@ -48,6 +60,8 @@ export default function Share() {
     /\.your-element/g,
     "body"
   )}`;
+  const [downloadLink] = useAtom(downloadLinkAtom);
+  const [saving, setSaving] = useState(false);
 
   return (
     <div className="share-section">
@@ -99,6 +113,41 @@ export default function Share() {
           </div>
         </button>
       </form>
+      <button
+        className="app-btn-lg"
+        onClick={() => {
+          setSaving(true);
+          // download img from downloadLink
+          const img = new Image();
+          img.src = downloadLink;
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return;
+            ctx.drawImage(img, 0, 0);
+            const dataURL = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            link.download = "gradient.png";
+            link.href = dataURL;
+            link.click();
+            setSaving(false);
+          };
+        }}
+      >
+        <div className="icon">
+          {saving ? (
+            <HiOutlineDotsHorizontal size={36} />
+          ) : (
+            <BsFillFileImageFill size={36} />
+          )}
+        </div>
+        <div className="app-btn-lg-right">
+          <span className="app-btn-lg-title">Save</span>
+          <span>Save as a PNG</span>
+        </div>
+      </button>
     </div>
   );
 }

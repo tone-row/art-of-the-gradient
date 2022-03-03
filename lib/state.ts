@@ -1,9 +1,9 @@
+import { atom, useAtom } from "jotai";
 import { atomWithStorage, splitAtom } from "jotai/utils";
 
 import { AppState } from "./types";
 import { ColorResult } from "react-color";
 import { PresetColor } from "react-color/lib/components/sketch/Sketch";
-import { atom } from "jotai";
 import { blendModes } from "./constants";
 import { generateLayer } from "./generateLayer";
 import { inflate } from "pako";
@@ -22,19 +22,20 @@ export function rgba(c: ColorResult["rgb"]) {
   return `rgba(${c.r}, ${c.g}, ${c.b}, ${c.a})`;
 }
 
+function randomSettings(): AppState["settings"] {
+  const blend = blendModes[Math.floor(Math.random() * blendModes.length)];
+  return {
+    width: { amt: 100, unit: "%" },
+    height: { amt: 100, unit: "%" },
+    x: { amt: 0, unit: "%" },
+    y: { amt: 0, unit: "%" },
+    blend,
+  };
+}
+
 export const settingsAtom = atomWithStorage<AppState["settings"]>(
   keyWithPath(SETTINGS_KEY),
-  (() => {
-    // random blend mode
-    const blend = blendModes[Math.floor(Math.random() * blendModes.length)];
-    return {
-      width: { amt: 100, unit: "%" },
-      height: { amt: 100, unit: "%" },
-      x: { amt: 0, unit: "%" },
-      y: { amt: 0, unit: "%" },
-      blend,
-    };
-  })()
+  randomSettings()
 );
 settingsAtom.onMount = (set) => {
   const dataStr = new URLSearchParams(window.location.search).get("data");
@@ -58,16 +59,17 @@ layersAtom.onMount = (set) => {
   set(data.layers);
 };
 
+function randomLayers(): AppState["layers"] {
+  const numLayers = Math.floor(Math.random() * 3) + 1;
+  const layers: AppState["layers"] = [];
+  for (let i = 0; i < numLayers; i++) {
+    layers.push(generateLayer(layers));
+  }
+  return layers;
+}
 export const layersAtomWithStorage = atomWithStorage<AppState["layers"]>(
   keyWithPath(LAYERS_KEY),
-  (() => {
-    const numLayers = Math.floor(Math.random() * 3) + 1;
-    const layers: AppState["layers"] = [];
-    for (let i = 0; i < numLayers; i++) {
-      layers.push(generateLayer(layers));
-    }
-    return layers;
-  })()
+  randomLayers()
 );
 layersAtomWithStorage.onMount = (set) => {
   const dataStr = new URLSearchParams(window.location.search).get("data");
@@ -251,3 +253,12 @@ export const getBaseURL = () => {
 export const TITLE = "L'art du dégradé ~ The Art of the Gradient";
 export const DESCRIPTION =
   "Your go-to gizmo for generating goofy gradients- i.e., a CSS Gradient Generator";
+
+export function useRandomize() {
+  const [_layers, updateLayers] = useAtom(layersAtomWithStorage);
+  const [_settings, updateSettings] = useAtom(settingsAtom);
+  return () => {
+    updateLayers(randomLayers());
+    updateSettings(randomSettings());
+  };
+}
