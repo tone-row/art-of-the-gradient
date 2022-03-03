@@ -113,13 +113,27 @@ export default function Share() {
           </div>
         </button>
       </form>
-      <a
+      <button
         className="app-btn-lg"
-        href={downloadLink}
-        download="gradient.png"
         onClick={() => {
           setSaving(true);
-          setTimeout(() => setSaving(false), 3000);
+          // download img from downloadLink
+          const img = new Image();
+          img.src = downloadLink;
+          img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            if (!ctx) return;
+            ctx.drawImage(img, 0, 0);
+            const dataURL = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            link.download = "gradient.png";
+            link.href = dataURL;
+            link.click();
+            setSaving(false);
+          };
         }}
       >
         <div className="icon">
@@ -133,7 +147,7 @@ export default function Share() {
           <span className="app-btn-lg-title">Save</span>
           <span>Save as a PNG</span>
         </div>
-      </a>
+      </button>
     </div>
   );
 }
