@@ -119,6 +119,7 @@ export default function Share() {
           setSaving(true);
           fetch(downloadLink, {
             method: "GET",
+            mode: "no-cors",
           })
             .then((res) => res.blob())
             .then((blob) => {
