@@ -246,11 +246,16 @@ section.code {
 .background-type-btn:focus-within,
 .blend-mode:focus-within,
 .sketch-picker:focus-visible,
-.sketch-picker:focus-within {
+.sketch-picker:focus-within,
+.random-button:focus-visible {
   outline-offset: 1px;
   outline-color: var(--grey-1);
   outline-style: solid;
   outline-width: 2px;
+}
+
+.random-button:focus-visible {
+  outline-offset: 0;
 }
 
 .icon-btn.delete-color:focus-visible {
@@ -337,4 +342,30 @@ section.support {
   grid-auto-flow: column;
   gap: var(--gap-sm);
   justify-content: start;
+}
+
+.random-button {
+  background-color: var(--grey-0);
+  padding: var(--gap);
+  border: none;
+  justify-self: start;
+  border-radius: 4px;
+  font-size: var(--font-size-sm);
+  color: var(--grey-2);
+  cursor: pointer;
+  font-family: var(--font-family);
+  font-weight: 700;
+  line-height: 1;
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--gap-sm);
+}
+
+.random-button path {
+  stroke: currentColor;
+}
+
+.random-button:hover {
+  background-color: var(--grey);
+  color: var(--black);
 }

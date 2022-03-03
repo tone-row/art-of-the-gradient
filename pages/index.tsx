@@ -6,9 +6,11 @@ import {
   getBaseURL,
   keyWithPath,
   settingsAtom,
+  useRandomize,
 } from "../lib/state";
 
 import { Code } from "../components/Code";
+import { GrMagic } from "react-icons/gr";
 import Head from "next/head";
 import type { NextPage } from "next";
 import Share from "../components/Share";
@@ -45,6 +47,7 @@ const Home: NextPage = () => {
   const [settings] = useAtom(settingsAtom);
   const [showInterface, setShowInterface] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
+  const randomize = useRandomize();
   useEffect(() => {
     // catch h key
     function onKeyDown(e: KeyboardEvent) {
@@ -172,6 +175,20 @@ const Home: NextPage = () => {
             </a>
           </div>
         </header>
+        <button
+          onClick={(e) => {
+            randomize();
+            const el = e.currentTarget;
+            el.classList.remove("abracadabra");
+            requestAnimationFrame(() => {
+              el.classList.add("abracadabra");
+            });
+          }}
+          className="random-button"
+        >
+          <GrMagic />
+          <span>Random Gradient</span>
+        </button>
         <section className="preview">
           <div
             className="preview-inner"
