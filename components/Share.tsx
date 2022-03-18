@@ -130,6 +130,7 @@ export default function Share() {
 
           const img = new Image();
           img.src = downloadLink + additionalSearchParams;
+          img.crossOrigin = "Anonymous";
           img.onload = () => {
             const canvas = document.createElement("canvas");
             canvas.width = img.width;
