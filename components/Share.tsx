@@ -53,6 +53,7 @@ const downloadLinkAtom = atom((get) => {
 });
 
 export default function Share() {
+  const [settings] = useAtom(settingsAtom);
   const [shareLink] = useAtom(shareLinkAtom);
   const [tweetLink] = useAtom(tweetLinkAtom);
   const [codeString] = useAtom(codeStringAtom);
@@ -118,8 +119,17 @@ export default function Share() {
         onClick={() => {
           setSaving(true);
           // download img from downloadLink
+
+          let additionalSearchParams = "";
+          if (settings.width.unit === "px") {
+            additionalSearchParams += `&width=${settings.width.amt}`;
+          }
+          if (settings.height.unit === "px") {
+            additionalSearchParams += `&height=${settings.height.amt}`;
+          }
+
           const img = new Image();
-          img.src = downloadLink;
+          img.src = downloadLink + additionalSearchParams;
           img.onload = () => {
             const canvas = document.createElement("canvas");
             canvas.width = img.width;
