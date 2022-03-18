@@ -11,6 +11,15 @@ export default async function handler(
   if (!url || typeof url !== "string")
     return res.status(400).send("url is required");
 
+  const width =
+    typeof req.query["width"] === "string"
+      ? parseInt(req.query["width"], 10)
+      : 1200;
+  const height =
+    typeof req.query["height"] === "string"
+      ? parseInt(req.query["height"], 10)
+      : 630;
+
   let browser = null;
   let rawScreenshot = null;
   try {
@@ -22,8 +31,8 @@ export default async function handler(
 
     const page = await browser.newPage();
     await page.setViewport({
-      width: 1200,
-      height: 630,
+      width,
+      height,
     });
     await page.goto(url, {});
 
@@ -41,6 +50,9 @@ export default async function handler(
   // Set the s-maxage property which caches the images then on the Vercel edge
   res.setHeader("Cache-Control", "s-maxage=31536000, stale-while-revalidate");
   res.setHeader("Content-Type", "image/png");
+  // Allow from anywhere
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   // write the image to the response with the specified Content-Type
   res.end(rawScreenshot);
 }
