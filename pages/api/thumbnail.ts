@@ -50,6 +50,9 @@ export default async function handler(
   // Set the s-maxage property which caches the images then on the Vercel edge
   res.setHeader("Cache-Control", "s-maxage=31536000, stale-while-revalidate");
   res.setHeader("Content-Type", "image/png");
+  // Allow from anywhere
+  res.setHeader("Access-Control-Allow-Origin", "*");
+
   // write the image to the response with the specified Content-Type
   res.end(rawScreenshot);
 }
